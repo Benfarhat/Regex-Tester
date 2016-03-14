@@ -461,12 +461,12 @@
 			$("#regex-result").keyup(function() {
 				var self = $(this);
 				$("#regex-div-result").html(self.val()
-						.replace(/&/g,'&amp;') 				// &
-						.replace(/</g,'&lt;')						// <
-						.replace(/>/g,'&gt;')						// >
-						.replace(/  /g,'&nbsp;&nbsp;')		// double espace
+						.replace(/&/g,'&amp;') 		// &
+						.replace(/</g,'&lt;')		// <
+						.replace(/>/g,'&gt;')		// >
+						.replace(/  /g,'&nbsp;&nbsp;')	// double espace
 						.replace(/\t/g,"&nbsp;&nbsp;")	// tabulation
-						.replace(/\n/g,"<br>") 					// nouvelle ligne
+						.replace(/\n/g,"<br>") 		// nouvelle ligne
 						);
 			});
 
