@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head> 
+		<title>Testeur d'expressions régulières</title>
+		<meta charset="utf-8">
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<!-- Custom Fonts -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+		<link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+		<!-- Latest compiled JavaScript -->
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+	
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		
+		<style>
+			body {
+				overflow-x: hidden;
+				line-height: 2.22857;
+			}
+
+			p {
+				font-size: 20px;
+			}
+
+			p.small {
+				font-size: 16px;
+			}
+
+			a,
+			a:hover,
+			a:focus,
+			a:active,
+			a.active {
+				outline: 0;
+				color: #18bc9c;
+			}
+
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				text-transform: uppercase;
+				font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+				font-weight: 700;
+			}
+
+			hr.star-light,
+			hr.star-primary {
+				margin: 25px auto 30px;
+				padding: 0;
+				max-width: 250px;
+				border: 0;
+				border-top: solid 5px;
+				text-align: center;
+			}
+
+			hr.star-light:after,
+			hr.star-primary:after {
+				content: "\f005";
+				display: inline-block;
+				position: relative;
+				top: -.8em;
+				padding: 0 .25em;
+				font-family: FontAwesome;
+				font-size: 2em;
+			}
+
+			hr.star-light {
+				border-color: #fff;
+			}
+
+			hr.star-light:after {
+				color: #fff;
+				background-color: #18bc9c;
+			}
+
+			hr.star-primary {
+				border-color: #212122;
+			}
+
+			hr.star-primary:after {
+				color: #212122;
+				background-color: #fff;
+			}
+
+
+			header {
+				text-align: center;
+				color: #fff;
+				background: #18bc9c;
+			}
+
+			header .container {
+				padding-top: 100px;
+				padding-bottom: 50px;
+			}
+
+			header img {
+				display: block;
+				margin: 0 auto 20px;
+			}
+
+			.intro-text .name {
+				display: block;
+				text-transform: uppercase;
+				font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+				font-size: 2em;
+				font-weight: 700;
+			}
+
+			.intro-text .skills {
+				font-size: 1.25em;
+				font-weight: 300;
+			}
+			.navbar-default{
+				background-color: #212122;
+			}
+			.navbar-default .navbar-brand {
+				color: #FFF;
+			}
+			.navbar-default .navbar-brand:focus,.navbar-default .navbar-brand:hover {
+				color: #18bc9c;
+				background-color: transparent;
+			}
+			.navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li > a {
+				color: #FFF;
+			}
+			.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+				color: #18bc9c;
+				background-color: transparent;
+			}
+
+
+
+			@media(min-width:768px) {
+				header .container {
+					padding-top: 120px;
+					padding-bottom: 100px;
+				}
+
+				header .intro-text .name {
+					font-size: 4.75em;
+				}
+
+				header .intro-text .skills {
+					font-size: 1.75em;
+				}
+			}
+
+			@media(min-width:768px) {
+				.navbar-fixed-top {
+					padding: 25px 0;
+					-webkit-transition: padding .3s;
+					-moz-transition: padding .3s;
+					transition: padding .3s;
+				}
+
+				.navbar-fixed-top .navbar-brand {
+					font-size: 2em;
+					-webkit-transition: all .3s;
+					-moz-transition: all .3s;
+					transition: all .3s;
+				}
+
+				.navbar-fixed-top.navbar-shrink {
+					padding: 10px 0;
+				}
+
+				.navbar-fixed-top.navbar-shrink .navbar-brand {
+					font-size: 1.5em;
+				}
+			}
+
+			.navbar {
+				text-transform: uppercase;
+				font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+				font-weight: 700;
+			}
+
+			.navbar a:focus {
+				outline: 0;
+			}
+
+			.navbar .navbar-nav {
+				letter-spacing: 1px;
+			}
+
+			.navbar .navbar-nav li a:focus {
+				outline: 0;
+			}
+
+			.navbar-default,
+			.navbar-inverse {
+				border: 0;
+			}
+
+			section {
+				padding: 100px 0;
+			}
+
+			section h2 {
+				margin: 0;
+				font-size: 3em;
+			}
+
+			section.success {
+				color: #fff;
+				background: #18bc9c;
+			}
+
+			section.success a,
+			section.success a:hover,
+			section.success a:focus,
+			section.success a:active,
+			section.success a.active {
+				outline: 0;
+				color: #212122;
+			}
+
+			@media(max-width:767px) {
+				section {
+					padding: 75px 0;
+				}
+
+				section.first {
+					padding-top: 75px;
+				}
+			}
+
+
+
+			.btn-outline {
+				margin-top: 15px;
+				border: solid 2px #fff;
+				font-size: 20px;
+				color: #fff;
+				background: 0 0;
+				transition: all .3s ease-in-out;
+			}
+
+			.btn-outline:hover,
+			.btn-outline:focus,
+			.btn-outline:active,
+			.btn-outline.active {
+				border: solid 2px #fff;
+				color: #18bc9c;
+				background: #fff;
+			}
+
+			.floating-label-form-group {
+				position: relative;
+				margin-bottom: 0;
+				padding-bottom: .5em;
+				// border-bottom: 1px solid #eee;
+			}
+
+			.floating-label-form-group input,
+			.floating-label-form-group textarea {
+				z-index: 1;
+				position: relative;
+				padding-left:8px;
+				padding-right:8px;
+				border: 1px solid #aaa;;
+				border-radius: 0;
+				font-size: 1.5em;
+				background: 0 0;
+				box-shadow: none!important;
+				resize: none;
+			}
+
+			.floating-label-form-group label {
+				display: block;
+				z-index: 0;
+				position: relative;
+				top: 2em;
+				margin: 0;
+				font-size: .85em;
+				line-height: 1.764705882em;
+				vertical-align: middle;
+				vertical-align: baseline;
+				opacity: 0;
+				-webkit-transition: top .3s ease,opacity .3s ease;
+				-moz-transition: top .3s ease,opacity .3s ease;
+				-ms-transition: top .3s ease,opacity .3s ease;
+				transition: top .3s ease,opacity .3s ease;
+			}
+
+			.floating-label-form-group::not(:first-child) {
+				padding-left: 14px;
+				border-left: 1px solid #eee;
+			}
+
+			.floating-label-form-group-with-value label {
+				top: 0;
+				opacity: 1;
+			}
+
+			.floating-label-form-group-with-focus label {
+				color: #18bc9c;
+			}
+
+			form .row:first-child .floating-label-form-group {
+				border-top: 1px solid #eee;
+			}
+
+			footer {
+				color: #fff;
+			}
+
+			footer h3 {
+				margin-bottom: 30px;
+			}
+
+			footer .footer-above {
+				padding-top: 50px;
+				background-color: #212122;
+			}
+
+			footer .footer-col {
+				margin-bottom: 50px;
+			}
+
+			footer .footer-below {
+				padding: 25px 0;
+				text-transform: uppercase;
+				font-size:1.2em;
+				font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+				font-weight: 700;
+				background-color: #233140;
+				background-color: #272827;
+			}
+
+			.btn:focus,
+			.btn:active,
+			.btn.active {
+				outline: 0;
+			}
+			.regex-input{
+				width: 75%;
+			}
+			.regex-modifier{
+				width: 15%;
+			}
+			.regex-text{
+				width: 99.22857%;
+			}
+			#regex-div-result{
+				border:1px solid #aaa;
+				display:block;
+				width:100%;
+				min-height:410px;
+				font-size: 0.9em;
+				padding: 4px 8px;
+				word-wrap: break-word;
+			}
+			#regex-div-result.success{
+				border:1px solid #18bc9c;
+			}
+			#regex-div-result.error{
+				border:1px solid #e74c3c;
+			}
+			.floating-label-form-group textarea{
+				font-size:0.9em;
+			}
+			.slash{
+			max-width: 5%;
+			font-size: 2em;
+			padding-right:4px;
+			padding-left: 4px;
+			}
+			table{
+			width:100%;
+			text-align:justify;
+			font-size:0.9em;
+			}
+			table h4{
+				text-align:center;
+			}
+			table .regex-titre{
+				
+				font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+				font-weight: 700;
+				font-size:1.2em;
+			}
+			.regex-memo{
+				height:585px;
+				max-height: 585px;
+				overflow-y:auto;
+				border:1px solid #aaa;
+				padding:4px 8px;
+			}
+			.intro-text h3{
+				text-align: center;
+			}
+			section{
+				padding-bottom:40px;
+			}
+			span.match{
+			color: #fff;
+			background-color: #18bc9c;
+			}
+		</style>
+	</head> 
+	<body id="haut"> 
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Partie Mobile -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#regex-navbar-collapse">
+                    <span class="sr-only">Menu</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#haut">Regex Tester</a>
+            </div>
+
+            <!-- Menu en haut à droite-->
+            <div class="collapse navbar-collapse" id="regex-navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#haut"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="https://fr.wikipedia.org/wiki/Expression_rationnelle" target="blank">Définition Wikipedia</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp" target="blank">Référence sur Mozilla</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="https://borntolearntunisia.wordpress.com/" target="blank">BornToLearnTunisia</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+	<!-- Notre script -->
+	<script>
+		$(document).ready(function() {
+		
+			// ***** On synchronise le contenu du textarea et de la div (texte à traité et texte traité)
+			$("#regex-div-result").html($("#regex-result").val().replace(/\n/g,"<br>"));
+			// ***** On nettoie le contenu du textarea
+			$("#regex-result").keyup(function() {
+				var self = $(this);
+				$("#regex-div-result").html(self.val()
+						.replace(/&/g,'&amp;') 		// &
+						.replace(/</g,'&lt;')		// <
+						.replace(/>/g,'&gt;')		// >
+						.replace(/  /g,'&nbsp;&nbsp;')	// double espace
+						.replace(/\t/g,"&nbsp;&nbsp;")	// tabulation
+						.replace(/\n/g,"<br>") 		// nouvelle ligne
+						);
+			});
+
+			// ***** Mise en place d'un auto close pour les caractères [ , ( et {
+			$("#regex-input").on('keydown',function(ev) {
+				// On test le caractères entrés
+				key = ev.key;
+				if (  (key == "(") || (key == "[") || (key == "{") ) {
+						// On récupère  la position du caractère dans l'input
+						var posCur = ev.target.selectionStart;
+						// On garde temporairement le contenu de l'input
+						var textinput = $("#regex-input").val();
+						// On prépare la chaine d'auto-close
+						switch(key) {
+							case "[":
+								var i = "[]";
+								break;
+							case "(":
+								var i = "()";
+								break;
+							default:
+								var i = "{}";
+						} 				
+						// On insère cette chaine à l'endroit du curseur 
+						$("#regex-input").val(textinput.substring(0, posCur) + i + textinput.substring(posCur) );
+						// Le problème ici est que le curseur se positionne à la fin suite au changement de valeur
+						// On revient à la position prélevé + 1 pour être à l'intérieur de la chaine
+						var input = document.getElementById("regex-input");
+						input.focus();
+						input.setSelectionRange(posCur+1,posCur+1);
+						// On utilise preventDefault pour éviter qu'il insère le caractère entré puisqu'on l'a déjà fait dans la chaine d'auto-close
+						ev.preventDefault();
+					}
+			});
+
+			// ***** Traitement du texte si on change la regex ou le modificateur
+			$("#regex-input, #regex-modifier").on('keyup',function(ev) {
+				// Déclaration des variables
+				var self = $(this);
+				// Texte à tester
+				var textachecker = $("#regex-result").val();
+				// On sauvegarde le texte à traité dans une variable temporaire pour garder l'original
+				var resultat = textachecker;
+				// On enlève de la regex les espaces
+				var regex = $("#regex-input").val().replace(/ /g , "");
+				// var regex = $("#regex-input").val().replace(/ /g , "");
+				$("#regex-input").val(regex);
+				// Dans le modificateur, on enleve les espaces & on ne garde que les flags g, i ou m, et on enlève les éventuelles répétitions des flags autorisés
+				var modifier = $("#regex-modifier").val().replace(/ /g , "").replace(/[^gim]/g, '').replace(/(.)(?=.*\1)/g, "");
+				// On crée notre Expression régulière
+				var regexp = new RegExp(regex,modifier);
+				// Le constructeur RegExp me permet d'avoir une expression régulière propre j'en extrait les parties et je les injecte dans les inputs correspondant
+				// Notez que la dernière partie est le modificateur, donc si vous mettez un flag qui n'existe pas, il sera automatiquement enlevé
+				// J'extrait et injecte le modificateur
+				var mesinputs = regexp.toString().split('/');
+				$("#regex-modifier").val(mesinputs[mesinputs.length-1]);
+				// Je réecris le regex s'il n'est pas vide (sinon on aura la chaine (?=)
+				if (regex != '') {
+					// On veille a enlever le premier et dernier "slash" puisqu'ils sont déja représenté dans le formulaire
+					$("#regex-input").val(new RegExp(regex).toString().replace(/^\//, '').replace(/\/$/, ''));
+				}
+				// On test le regexp sur le texte à traité
+				var match = textachecker.match(regexp);
+				// Si on a un resultat on les met en valeur et on encadre la div en vert
+				if ( (match != null) && ($("#regex-input").val() != '') ) {
+					$("#regex-div-result").toggleClass( 'success', 'error' );
+					var global;
+					// On vérifie si le remplacement sera global ou pas (on test si la lettre g est dans le modificateur)
+					if ($("#regex-modifier").val().search(/g/) == 0) {
+						global = true;
+					} else {
+						global = false;
+					}
+					for (var i = 0; i < match.length; i++) {
+						if (global) {
+						resultat = resultat.replace(new RegExp(match[i], "g"), '<span class="match">'+match[i]+'</span>');
+						} else {
+						resultat = resultat.replace(match[i], '<span class="match">'+match[i]+'</span>');
+						}
+					}
+				} else { // Sinon on encadre la div en rouge
+				$("#regex-div-result").toggleClass( 'error', 'success' );
+				}
+				// On insère le nouveau texte traité avec des couleurs
+				$("#regex-div-result").html(resultat.replace(/\n/g,"<br>"));
+			});
+			
+		});
+	</script>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                        <span class="name">Les Expressions Régulières</span>
+                        <hr class="star-light">
+                        <span class="skills">Apprenez en pratiquant!</span>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</header>
+    <!-- Fin Header -->
+    <!-- Section -->
+	<section>
+		<div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="intro-text">
+                        <h3>Zone de test</h3>	
+						<hr class="star-primary">	
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+								<h3>/ Votre Expression régulières / Modificateurs</h3>
+                                <div><span class="slash">/</span><input type="text" id="regex-input" class="regex-input"><span class="slash">/</span><input type="text" size="5" maxlength="5" id="regex-modifier" class="regex-modifier"></div>
+								<div class="row">
+									<div class="col-lg-6">
+										<h3>Texte à analyser</h3>
+										<!-- Du texte est inséré dans le textarea pour les tests -->
+										<textarea id="regex-result" class="regex-text" rows="14">01/01/1987
+01/02/2011
+01/03/98
+test1@email.com
+test-2@email4.info
+https://borntolearntunisia.wordpress.com/
+abc aaabbbbcccc aaaaaaaabbbbbaaaccc
+michel mehdi miriam mary 
+dorra elyes 5145789546621215154
+321457215481321545
+756895982583154764</textarea>
+									</div>
+									<div class="col-lg-6">
+										<h3>Texte Traité</h3>
+										<div id="regex-div-result"></div>
+									</div>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="intro-text">
+                        <h3>Memo</h3>	
+						<hr class="star-primary">						
+                        <div class="row">
+							<div class="regex-memo">
+								<table class="table table-striped table-bordered">
+									<tbody>
+										<tr>
+											<td colspan="2"><h4>Modificateurs</h4></td>
+										</tr>
+										<tr>
+											<td class="regex-titre">i</td>
+											<td>Recherche Insensible à la casse</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">g</td>
+											<td>Recherche Globale / Toutes les occurences</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">m</td>
+											<td>Recherche Multiligne</td>
+										</tr>
+										<tr>
+											<td colspan="2"><h4>Classes</h4></td>
+										</tr>
+										<tr>
+											<td class="regex-titre">[abc]</td>
+											<td>Correspond au a ou b ou c</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">[^abc]</td>
+											<td>Un caractère qui n'est ni a ni b ni c</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">[A-Z]</td>
+											<td>N'importe quel caractère entre A majuscule et Z majuscule</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">[a-zA-Z]</td>
+											<td>N'importe quel caractère entre a et z (minuscule ou majuscule)</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">(ab|cd|ef)</td>
+											<td>Correspond à ou "ab" ou "cd" ou "ef"</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">(...)</td>
+											<td>Permet de capturer ce qui est entre parenthèse</td>
+										</tr>
+										<tr>
+											<td colspan="2"><h4>Metacaractères</h4></td>
+										</tr>
+										<tr>
+											<td class="regex-titre">^</td>
+											<td>Début de ligne</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">$</td>
+											<td>Fin de ligne</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">.</td>
+											<td>N'importe quel caractère</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">\w</td>
+											<td>Un mot</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">\W</td>
+											<td>Ce qui n'est pas un mot</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">\d</td>
+											<td>Un nombre</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">\D</td>
+											<td>Ce qui n'est pas un nombre</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">\s</td>
+											<td>Un espace, tabulation, saut de ligne</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">\S</td>
+											<td>Ni espace, ni tabulation ni saut de ligne</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">\b</td>
+											<td>En debut ou fin de mot</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">\B</td>
+											<td>Ce qui n'est pas en début ou fin de mot</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">\t</td>
+											<td>Tabulation</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">\l</td>
+											<td>Saut de ligne</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">\r</td>
+											<td>Retour chariot</td>
+										</tr>
+										<tr>
+											<td colspan="2"><h4>Quantificateurs</h4></td>
+										</tr>
+										<tr>
+											<td class="regex-titre">a+</td>
+											<td>Correspond à au moins un a</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">a*</td>
+											<td>Correspond à 0 ou plusieurs a</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">a?</td>
+											<td>Correspond à 0 ou 1 a</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">a{X}</td>
+											<td>Correspond à X a consécutifs</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">a{X,Y}</td>
+											<td>Correspond à un séquend entre X et Y a</td>
+										</tr>
+										<tr>
+											<td class="regex-titre">a{X,}</td>
+											<td>Correspond à une séquence d'au moins X a</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Fin Header -->
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col col-md-12">
+                        <h3>A propos du template</h3>
+						<hr class="star-primary">
+                        <p>Freelance, un thème gratuit basé sur Bootstrap que vous pouvez télécharger ici: <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyleft - Benfarhat - 2016
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Fin Footer -->
+</html>
